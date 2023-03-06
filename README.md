@@ -1,1 +1,1 @@
-![Alt text](bbb.png)
+![Alt text](https://via.placeholder.com/10/243B55?text=+) #243B55
