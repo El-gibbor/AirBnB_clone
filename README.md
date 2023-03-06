@@ -14,4 +14,44 @@
 ### Testing  
 * Used python Unittesting -> [Python Unittest](https://realpython.com/python-testing/)
 ### How to start and use this command interpreter:
-* Clone this repository -> `git clone https://github.com/El-gibbor/AirBnB_clone.git`
+* Clone this repository -> `git clone https://github.com/El-gibbor/AirBnB_clone.git`  
+* Access the directory -> `cd AirBnB_clone`  
+* Run the console application interactively:  
+```
+$ ./console.py
+(hbnb) help
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+
+(hbnb) 
+(hbnb) 
+(hbnb) quit
+$
+```  
+* Or, You can also run it non interactively:   
+```
+$ echo "help" | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+$ cat test_help
+help
+$
+$ cat test_help | ./console.py
+(hbnb)
+
+Documented commands (type help <topic>):
+========================================
+EOF  help  quit
+(hbnb) 
+$
+```  
+### Authors:
+* Ojore Chris -> [Linkdin](https://www.linkedin.com/in/ojore-chris/) | [Github](https://github.com/creasedigital) | [Portfolio](https://creasedigital.github.io/) | [Twitter](https://twitter.com/creasedigital)  
+* Chiagoziem Elgibbor -> [Linkdin](https://www.linkedin.com/in/chiagoziem-elgibbor-173858208/) | [Twitter](https://twitter.com/Chiagoziem94)
