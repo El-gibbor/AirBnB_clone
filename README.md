@@ -8,7 +8,7 @@
 * Managing your custom Modules as python packages -> [Packages](https://docs.python.org/3.4/tutorial/modules.html#packages)
 * Line oriented comand interpreters -> [Cmd Module](https://docs.python.org/3.8/library/cmd.html#module-cmd)  
 * Generating Random Id(s) with Universal unique identifier -> [Uuid module](https://docs.python.org/3.8/library/uuid.html#module-uuid)  
-* Parking and unparcking of arguments -> [*args/**kwargs]()
+* Parking and unparcking of arguments -> [*args & **kwargs]()
 * Converting objects to byte stream & reconstructing them back from byte stream -> [Serialization & deserialization](https://docs.python.org/3/library/json.html#module-json)  
 * Implementtation of Date and time -> [Datetime module](https://docs.python.org/3.8/library/datetime.html#module-datetime)
 ### Testing  
