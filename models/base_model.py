@@ -9,25 +9,15 @@ from datetime import datetime
 class BaseModel:
     """defines the base model class"""
 
-    def __init__(self, *args, **keyValz):
-        """instantiating public instance attributes
-        Args:
-            args: arbitrary list of positional arguments
-            keyValz (dictionary): arbitrary key-value paired arguments
-        """
+    def __init__(self):
+        """instantiating public instance attributes"""
+
         self.id = str(uuid4())
         self.created_at = self.updated_at = datetime.now()
-        if keyValz:
-            keyValz.pop("__class__")
-            for keyz, valz in self.__dict__.items():
-                if keyz in ("created_at", "updated_at"):
-                    setattr(self, keyz, datetime.now().isoformat())
-                else:
-                    setattr(self, keyz, valz)
 
     def __str__(self) -> str:
         """prints class name, instance id & instance dict in a given format"""
-        return f"{[type(self).__name__]} {(self.id)} {self.__dict__}"
+        return f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """updates public instance attr "updated_at" with the current d-time"""
@@ -40,6 +30,8 @@ class BaseModel:
         for keyz, valz in self.__dict__.items():
             if keyz in ("created_at", "updated_at"):
                 # convert timestamp value pair to ISO format
-                dict_valz = valz.isoformat()
-                instance_dict[keyz] = dict_valz
+                timeValue = valz.isoformat()
+                instance_dict[keyz] = timeValue
+            else:
+                instance_dict[keyz] = valz
         return instance_dict
