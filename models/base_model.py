@@ -7,11 +7,21 @@ from datetime import datetime
 
 
 class BaseModel:
-    """defines the base model class"""
+    """defines the baseModel class"""
 
-    def __init__(self):
-        """instantiating public instance attributes"""
-
+    def __init__(self, *args, **kwargs):
+        """instantiating public instance attributes
+        Args
+            args: list of arbitrary positional arguments
+            kwargs - (dictionary): arbitrary key-value pair args.
+        """
+        if kwargs:
+            kwargs.pop("__class__")
+            for keyz, valz in kwargs.items():
+                if keyz in ("created_at", "updated_at"):
+                    setattr(self, keyz, datetime.now().isoformat())
+                else:
+                    setattr(self, keyz, valz)
         self.id = str(uuid4())
         self.created_at = self.updated_at = datetime.now()
 
