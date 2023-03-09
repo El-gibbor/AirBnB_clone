@@ -16,7 +16,7 @@ class BaseModel:
             kwargs - (dictionary): arbitrary key-value pair args.
         """
         if kwargs:
-            kwargs.pop("__class__")
+            kwargs.pop("__class__") if "__class__" in kwargs else None
             for keyz, valz in kwargs.items():
                 if keyz in ("created_at", "updated_at"):
                     setattr(self, keyz, datetime.now().isoformat())
