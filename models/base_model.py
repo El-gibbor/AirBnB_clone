@@ -15,15 +15,28 @@ class BaseModel:
             args: list of arbitrary positional arguments
             kwargs - (dictionary): arbitrary key-value pair args.
         """
+        # if kwargs:
+        #     kwargs.pop("__class__") if "__class__" in kwargs else None
+        #     for k, v in kwargs.items():
+        #         if k in ("created_at", "updated_at"):
+        #             setattr(self, k, datetime.now().isoformat())
+        #         else:
+        #             setattr(self, k, v)
+        # self.id = str(uuid4())
+        # self.created_at = self.updated_at = datetime.now()
+        #   def __init__(self, *args, **kwargs):
         if kwargs:
-            kwargs.pop("__class__") if "__class__" in kwargs else None
-            for k, v in kwargs.items():
-                if k in ("created_at", "updated_at"):
-                    setattr(self, k, datetime.now().isoformat())
-                else:
-                    setattr(self, k, v)
-        self.id = str(uuid4())
-        self.created_at = self.updated_at = datetime.now()
+            for key, value in kwargs.items():
+                if key == 'created_at' or key == 'updated_at':
+                    value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                if key != '__class__':
+                    setattr(self, key, value)
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            # storage.new(self)
+
 
     def __str__(self):
         """print in this format [<class name>] (<self.id>) <self.__dict__>"""
