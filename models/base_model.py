@@ -27,11 +27,11 @@ class BaseModel:
         #   def __init__(self, *args, **kwargs):
         if kwargs:
             time = None
-            kwargs.pop("__class__")
             for key, value in kwargs.items():
                 if key in ("created_at", "updated_at"):
                     time = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                setattr(self, key, time)
+                if key != '__class__':
+                    setattr(self, key, time)
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
