@@ -15,12 +15,13 @@ class BaseModel:
             args: list of arbitrary positional arguments
             kwargs - (dictionary): arbitrary key-value pair args.
         """
+
         if kwargs:
-            for key, value in kwargs.items():
-                if key in ("created_at", "updated_at"):
-                    value = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                if key != '__class__':
-                    self.__dict__[key] = value
+            for keyz, valz in kwargs.items():
+                if keyz in ("created_at", "updated_at"):
+                    valz = datetime.strptime(valz, '%Y-%m-%dT%H:%M:%S.%f')
+                if keyz != '__class__':
+                    self.__dict__[keyz] = valz
         else:
             self.id = str(uuid4())
             self.created_at = self.updated_at = datetime.now()
