@@ -1,5 +1,4 @@
-
-![Alt text](hbnb.png)  
+  
 # 0x00. AirBnB clone - The console
 Airbnb is a full-stack web application that includes database storage, a back-end API and front-end interface.  
 This is the first step/edition towards building this full web application. The goal is to create a command interpreter for the Airbnb objects. this also serves as a debugging tool for the programmer/command handler because it is an interactive console that provides you with a quick way to create your data model, manage (create, update, destroy, etc) objects via a console / command interpreter, store and persist objects to a file (JSON file), and also to execute commands and try out or test codes without creating a file.  
