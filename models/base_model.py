@@ -6,3 +6,30 @@ from uuid import uuid4
 from datetime import datetime
 
 
+class BaseModel:
+    """Base class that defines subclass methods and attr logic"""
+
+    def __init__(self):
+        """instantiating instance attributes"""
+
+        self.id = str(uuid4())
+        self.created_at = self.updated_at = datetime.now()
+
+    def __str__(self):
+        """print in this format [<class name>] (<self.id>) <self.__dict__>"""
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
+
+    def save(self):
+        """updates public instance attr "updated_at" with the current d-time"""
+        self.updated_at = datetime.now()
+
+    def to_dict(self):
+        """returns key-value pair of class instance using __dict__"""
+        inst_dict = {}
+        for keyz, valz in self.__dict__.items():
+            inst_dict["__class__"] = self.__class__.__name__
+            if keyz in ("created_at", "updated_at"):
+                inst_dict[keyz] = valz.isoformat()
+            else:
+                inst_dict[keyz] = valz
+        return inst_dict
