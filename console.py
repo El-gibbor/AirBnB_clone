@@ -4,6 +4,7 @@ import cmd
 from models import storage
 from models.base_model import BaseModel
 
+
 class HBNBCommand(cmd.Cmd):
     """defines the class for command interpreter"""
 
@@ -35,9 +36,11 @@ class HBNBCommand(cmd.Cmd):
         else:
             print(eval(cmd_args[0])().id)
             storage.save()
-            
+
     def show(self, cmd_args):
-        """Prints the string representation of an instance based on the class name and id"""
+        """Prints the string representation of an instance based
+        on the class name and id
+        """
         if not cmd_args:
             print("** class name missing **")
             return
@@ -52,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
             return
         # retrieve dictionary of all instances from the storage
         objects = storage.all()
-        
+
         # get instance with its name and id
         insts_id = cmd_args[1]
         insts_key = cls_name + "." + insts_id
@@ -61,6 +64,7 @@ class HBNBCommand(cmd.Cmd):
             print(isinstance)
         else:
             print("** no instance found **")
-            
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
