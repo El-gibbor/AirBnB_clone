@@ -60,8 +60,8 @@ class HBNBCommand(cmd.Cmd):
         insts_id = cmd_args[1]
         insts_key = cls_name + "." + insts_id
         if insts_key in objects:
-            isinstance = objects[insts_key]
-            print(isinstance)
+            instance = objects[insts_key]
+            print(instance)
         else:
             print("** no instance found **")
 
