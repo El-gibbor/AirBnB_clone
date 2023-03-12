@@ -4,6 +4,7 @@ logic and behaviour of the subclasses
 """
 from uuid import uuid4
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
@@ -25,6 +26,7 @@ class BaseModel:
         else:
             self.id = str(uuid4())
             self.created_at = self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         """print in this format [<class name>] (<self.id>) <self.__dict__>"""
@@ -33,6 +35,7 @@ class BaseModel:
     def save(self):
         """updates public instance attr "updated_at" with the current d-time"""
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """returns key-value pair of class instance using __dict__"""
