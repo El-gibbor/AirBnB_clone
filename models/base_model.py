@@ -3,4 +3,4 @@ from uuid import uuid4
 
 class BaseModel:
     def __init__(self) -> None:
-        self.id = id
+        self.id = uuid4()
