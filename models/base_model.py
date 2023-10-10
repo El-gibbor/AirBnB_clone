@@ -50,23 +50,19 @@ class BaseModel:
                 "created_at": self.created_at
         }
 
-    def _validate_value(self, name, value, Type):
-        """
-        This helper method will check to make sure that the user
-        is assigning the right data type to the right variable or
-        field. This method should help clean up our codebase by
-        doing all the manual heavy lifting
-
-        Args:
-            name: the name of the value eg. name, my_number etc
-            value: the value we are validating eg. 5, "my name" etc
-            Type: this is the expected type of the value to validate
-
-        Return:
-            returns the value if it passes all checks and is validated
-            correctly otherwise it will raise an appropriate error that
-            the tests can catch
-        """
+    def validate_data_type(name, value, expected_type):
+    """
+    Validates that the given value matches the expected data type.
+    Args:
+        name (str): The name of the variable or field.
+        value: The value to be validated.
+        expected_type (type): The expected data type of the value.
+        
+    Returns:
+        The validated value if it matches the expected type.
+    Raises:
+        TypeError: If the value does not match the expected type.
+    """
         if not type(value) is Type:
             raise TypeError("{} must be of type {}".format(name, Type))
 
