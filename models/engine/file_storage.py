@@ -47,9 +47,9 @@ class FileStorage:
             with open(FileStorage.__file_path) as json_str:
                 deserialised = load(json_str)
                 for obj_values in deserialised.values():
-                    cls_name = obj_values["__class__"]
-                    cls_obj = defined_classes[cls_name]
-                    self.new(cls_obj(**obj_values))
+                    class_name = obj_values["__class__"]
+                    actual_class = defined_classes[class_name]
+                    self.new(actual_class(**obj_values))
         except FileNotFoundError:
             pass
 
