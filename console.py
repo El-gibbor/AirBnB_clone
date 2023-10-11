@@ -4,9 +4,12 @@ mamipulate the bojects of our web application
 """
 import cmd
 from models.base_model import BaseModel
+
+
 class HBNBCommand(cmd.Cmd):
     """ Defines a class for managing command-line interface for the project """
 
+    # map all user defined classes for this program in this namespace
     defined_classes = {"BaseModel"}
 
     prompt = "(hbnb) "
@@ -29,14 +32,14 @@ class HBNBCommand(cmd.Cmd):
         """ creates a new instance, saves it (to the json file)
         and prints the id
         """
-        cmd_list = arg_line.split(" ")
-        if cmd_list[0] == "":
+        commands = arg_line.split(" ")
+        if commands[0] == "":
             print("** class name missing **")
         else:
-            if cmd_list[0] == "BaseModel":
-                obj_1 = BaseModel()
-                obj_1.save()
-                print(obj_1.id)
+            if commands[0] == "BaseModel":
+                base_obj = BaseModel()
+                base_obj.save()
+                print(base_obj.id)
             else:
                 print("** class doesn't exist **")
 
