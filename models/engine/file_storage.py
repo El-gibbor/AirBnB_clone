@@ -49,7 +49,7 @@ class FileStorage:
                 for obj_values in deserialised.values():
                     cls_name = obj_values["__class__"]
                     cls_obj = defined_classes[cls_name]
-                    self.new(eval(cls_name)(**obj_values))
+                    self.new(cls_obj(**obj_values))
         except FileNotFoundError:
             pass
 
