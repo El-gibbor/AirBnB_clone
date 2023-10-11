@@ -9,9 +9,6 @@ from models.base_model import BaseModel
 class HBNBCommand(cmd.Cmd):
     """ Defines a class for managing command-line interface for the project """
 
-    # map all user defined classes for this program in this namespace
-    defined_classes = {"BaseModel"}
-
     prompt = "(hbnb) "
 
     def emptyline(self):
