@@ -7,7 +7,7 @@ from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
-    """ Defines a class for managing command-line interface for the project """
+    """ Defines a class for managing command-line interface for the project. """
 
     prompt = "(hbnb) "
 
