@@ -40,7 +40,7 @@ class FileStorage:
         """
         from models.base_model import BaseModel
 
-        # gate all defined classes mapped to a name str in this name space
+        # get all defined classes mapped to a name str in this name space
         defined_classes = {"BaseModel": BaseModel}
 
         try:
