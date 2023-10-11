@@ -30,13 +30,14 @@ class HBNBCommand(cmd.Cmd):
         and prints the id
         """
         commands = arg_line.split(" ")
-        if commands[0] == "":
+        if not commands:
             print("** class name missing **")
         else:
-            if commands[0] == "BaseModel":
-                base_obj = BaseModel()
-                base_obj.save()
-                print(base_obj.id)
+            class_name = commands[0]
+            if class_name == "BaseModel":
+                new_instance = BaseModel()
+                new_instance.save()
+                print(new_instance.id)
             else:
                 print("** class doesn't exist **")
 
