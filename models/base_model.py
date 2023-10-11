@@ -5,6 +5,7 @@
 """
 from uuid import uuid4
 from datetime import datetime
+from models import storage
 
 
 class BaseModel:
@@ -27,6 +28,7 @@ class BaseModel:
             self.id = "{}".format(uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self) -> str:
         """ returns a string representaion of the class and
@@ -41,6 +43,7 @@ class BaseModel:
         with the current datetime
         """
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
         """ returns dictionary representation containing all attr of
@@ -55,4 +58,3 @@ class BaseModel:
             else:
                 dict_repr[keys] = val
         return dict_repr
-    
