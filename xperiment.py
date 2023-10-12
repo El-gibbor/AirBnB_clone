@@ -2,7 +2,7 @@
 """
 built-in or user-defined class, is an instance of the 'type' metaclass.
 so every class is of the class or data type "type".
-# """
+"""
 class myClass:
     pass
 
