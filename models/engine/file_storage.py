@@ -3,8 +3,11 @@
 Abstracting this from the BaseModel makes it independent so that we
 can easily replace the storage system without re-coding everything everywhere.
 """
-from json import dump, load
 
+
+import os
+import json
+import models
 
 class FileStorage:
     """defines a class for data interchange stream.
@@ -32,7 +35,7 @@ class FileStorage:
         all_objs = FileStorage.__objects
         to_dict_repr = {k: v.to_dict() for k, v in all_objs.items()}
         with open(FileStorage.__file_path, "w") as json_stream:
-            dump(to_dict_repr, json_stream)
+            json.dump(to_dict_repr, json_stream)
 
     def reload(self):
         """deserializes the JSON file to __objects
@@ -40,18 +43,11 @@ class FileStorage:
         """
         from models.base_model import BaseModel
 
-        # get all defined classes mapped to a name str in this name space
-        defined_classes = {"BaseModel": BaseModel}
-
-        try:
-            with open(FileStorage.__file_path) as json_str:
-                deserialised = load(json_str)
+        if os.path.exists(FileStorage.__file_path):
+            with open(FileStorage.__file_path) as json_file:
+                deserialised = json.load(json_file)
                 for obj_values in deserialised.values():
-                    class_name = obj_values["__class__"]
-                    actual_class = defined_classes[class_name]
-                    self.new(actual_class(**obj_values))
-        except FileNotFoundError:
-            pass
-
-
-
+                    class_name = obj_values.get("__class__")
+                    # validate input to eval() to make sure the evaluated expression is a class
+                    if isinstance(class_name, str) and type(eval(class_name)) == type:
+                        self.new(eval(class_name)(**obj_values))
