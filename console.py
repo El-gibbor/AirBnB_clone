@@ -43,6 +43,7 @@ class HBNBCommand(cmd.Cmd):
         arguments = args.split()
         if len(arguments) < 2:
             print("** instance id missing **")
+            # None can be returned here to validate missing id elsewhere
         else:
             class_name, instance_id = arguments[0], arguments[1]
             obj_key = "{}.{}".format(class_name, instance_id)
