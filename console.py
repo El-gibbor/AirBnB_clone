@@ -12,7 +12,7 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
-    # ******************** HELPER FUNCTIONS *********************
+    # ******************* HELPER FUNCTIONS ********************
     def validate_class_name(self, args):
         """ helper method to validate the existence of the given class name
             in the storage object's class mapping.
@@ -52,7 +52,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-    # ************************ CONSOLE COMMANDS ***********************
+    # ******************** CONSOLE COMMANDS *******************
     def emptyline(self):
         """ overides default emptyline execution """
         pass
