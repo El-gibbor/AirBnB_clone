@@ -14,7 +14,7 @@ class HBNBCommand(cmd.Cmd):
 
     # ******************** HELPER FUNCTIONS *********************
 
-    def validate_cls_name(self, args):
+    def validate_class_name(self, args):
         """ helper method to validate the existence of the given class name
             in the storage object's class mapping.
         Args:
@@ -26,26 +26,31 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
         else:
-            cls_name = args.split()[0]
-            if cls_name not in storage.cls_map():
+            class_name = args.split()[0]
+            if class_name not in storage.cls_map():
                 print("** class doesn't exist **")
             else:
-                return cls_name
+                return class_name
 
-    def validate_cls_id(self, args):
+    def validate_obj_id(self, args):
         """ Validates the presence of an instance ID in the provided arguments.
          Args:
             args (str): The input string containing class name and instance ID.
         Returns:
-            list: A list containing the split arguments if the instance ID
-                      is provided; otherwise, prints an error message.
-    """
+            list: A list containing the split arguments if the instance ID is
+                    provided; otherwise, prints an error message.
+        """
         arguments = args.split()
         if len(arguments) < 2:
             print("** instance id missing **")
-            # can return None here for further usecase to validat a mising id elsewhere
         else:
-            return arguments
+            class_name, instance_id = arguments[0], arguments[1]
+            obj_key = "{}.{}".format(class_name, instance_id)
+            try:
+                instance_object = storage.all()[obj_key]
+                return instance_object
+            except KeyError:
+                print("** no instance found **")
 
     # ************************ CONSOLE COMMANDS ***********************
 
@@ -65,8 +70,10 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, args):
-        """ Create, save (to the JSON file) and print the id of a new instance."""
-        cls_name = self.validate_cls_name(args)
+        """ Create, save (to the JSON file) and print the id of
+        a new instance.
+        """
+        cls_name = self.validate_class_name(args)
         if cls_name:
             new_obj = storage.cls_map()[cls_name]()
             new_obj.save()
@@ -75,15 +82,20 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, args):
         """ Prints string representation of an instance based
         on the class name and id. """
-        cls_name = self.validate_cls_name(args)
+        cls_name = self.validate_class_name(args)
         if cls_name:
-            cls_id = self.validate_cls_id(args)
-            if cls_id:
-                obj_key = "{}.{}".format(cls_name, args.split()[1])
-                try:
-                    print(storage.all()[obj_key])
-                except KeyError:
-                    print("** no instance found **")
+            cls_name_dot_id = self.validate_obj_id(args)
+            if cls_name_dot_id:
+                print(cls_name_dot_id)
+
+    def do_destroy(self, args):
+        """ Deletes an instance based on the class name and id """
+        cls_name = self.validate_class_name(args)
+        if cls_name:
+            cls_id_and_name = self.validate_obj_id(args)
+            if cls_id_and_name:
+                del cls_id_and_name
+                storage.save()
 
 
 if __name__ == '__main__':
