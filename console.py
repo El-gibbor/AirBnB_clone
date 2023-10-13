@@ -47,8 +47,8 @@ class HBNBCommand(cmd.Cmd):
             class_name, instance_id = arguments[0], arguments[1]
             obj_key = "{}.{}".format(class_name, instance_id)
             try:
-                instance_object = storage.all()[obj_key]
-                return instance_object
+                object = storage.all()[obj_key]
+                return object
             except KeyError:
                 print("** no instance found **")
 
@@ -92,9 +92,9 @@ class HBNBCommand(cmd.Cmd):
         """ Deletes an instance based on the class name and id """
         cls_name = self.validate_class_name(args)
         if cls_name:
-            cls_id_and_name = self.validate_obj_id(args)
-            if cls_id_and_name:
-                del cls_id_and_name
+            cls_object = self.validate_obj_id(args)
+            if cls_object:
+                del cls_object
                 storage.save()
 
 
