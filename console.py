@@ -52,7 +52,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-    # ******************** CONSOLE COMMANDS *******************
+    # ******************* CONSOLE COMMANDS ******************
     def emptyline(self):
         """ overides default emptyline execution """
         pass
