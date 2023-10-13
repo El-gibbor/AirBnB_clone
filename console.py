@@ -47,10 +47,10 @@ class HBNBCommand(cmd.Cmd):
         else:
             class_name, instance_id = arguments[0], arguments[1]
             obj_key = "{}.{}".format(class_name, instance_id)
-            try:
-                object = storage.all()[obj_key]
-                return object
-            except KeyError:
+            objects = storage.all()
+            if obj_key in objects:
+                return obj_key
+            else:
                 print("** no instance found **")
 
     # ************************ CONSOLE COMMANDS ***********************
@@ -85,17 +85,17 @@ class HBNBCommand(cmd.Cmd):
         on the class name and id. """
         cls_name = self.validate_class_name(args)
         if cls_name:
-            cls_name_dot_id = self.validate_obj_id(args)
-            if cls_name_dot_id:
-                print(cls_name_dot_id)
+            cls_instance = self.validate_obj_id(args)
+            if cls_instance:
+                print(cls_instance)
 
     def do_destroy(self, args):
         """ Deletes an instance based on the class name and id """
         cls_name = self.validate_class_name(args)
         if cls_name:
-            cls_object = self.validate_obj_id(args)
-            if cls_object:
-                del cls_object
+            obj_key = self.validate_obj_id(args)
+            if obj_key:
+                del storage.all()[obj_key]
                 storage.save()
 
 
