@@ -97,6 +97,31 @@ class HBNBCommand(cmd.Cmd):
                 del storage.all()[cls_key]
                 storage.save()
 
+    def do_all(sel, args):
+        """  Prints all string representation of all instances based or
+        not on the class name
+        """
+        if args == "":
+            print([str(v) for v in storage.all().values()])
+        else:
+            cmd = args.split()[0]
+            if cmd not in storage.cls_map():
+                print("** class doesn't exist **")
+            else:
+                for v in storage.all().values():
+                    if type(v).__name__ == cmd:
+                        print(v)
+
+
+    def do_update(self, args):
+        """ Updates an instance based on the class name and id by adding or
+        updating attribute (save the change into the JSON file) """
+        cls_name = self.validate_class_name(args)
+        if cls_name:
+            values_validated = self.validate_obj_id(args)
+            if values_validated is not None:
+                cls_instance, cls_key = values_validated
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
