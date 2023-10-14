@@ -36,7 +36,7 @@ class HBNBCommand(cmd.Cmd):
          Args:
             args (str): The input string containing class name and instance ID.
         Returns:
-            list or None: A list containing the split arguments if the instance ID
+            list or None: list containing the split arguments if instance ID
                             is provided; otherwise, prints an error message.
         """
         arguments = args.split()
@@ -92,7 +92,7 @@ class HBNBCommand(cmd.Cmd):
         cls_name = self.validate_class_name(args)
         if cls_name:
             values_validated = self.validate_obj_id(args)
-            if values_validated: # handled Nonetype return. This was a pain!
+            if values_validated:  # handled Nonetype return. This was a pain!
                 cls_instance, cls_key = values_validated
                 del storage.all()[cls_key]
                 storage.save()
