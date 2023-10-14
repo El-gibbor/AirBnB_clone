@@ -37,19 +37,18 @@ class HBNBCommand(cmd.Cmd):
             args (str): The input string containing class name and instance ID.
         Returns:
             list: A list containing the split arguments if the instance ID is
-                    provided; otherwise, prints an error message.
+                provided; otherwise, prints an error message.
         """
         arguments = args.split()
         if len(arguments) < 2:
             print("** instance id missing **")
-            # None can be returned here to validate missing id elsewhere
         else:
             class_name, instance_id = arguments[0], arguments[1]
             obj_key = "{}.{}".format(class_name, instance_id)
-            objects = storage.all()
-            if obj_key in objects:
-                return obj_key
-            else:
+            try:
+                instance_object = storage.all()[obj_key]
+                return instance_object, obj_key
+            except KeyError:
                 print("** no instance found **")
 
     # ******************* CONSOLE COMMANDS ******************
@@ -83,17 +82,19 @@ class HBNBCommand(cmd.Cmd):
         on the class name and id. """
         cls_name = self.validate_class_name(args)
         if cls_name:
-            cls_instance = self.validate_obj_id(args)
-            if cls_instance:
+            values_validated = self.validate_obj_id(args)
+            if values_validated:
+                cls_instance, cls_key = values_validated
                 print(cls_instance)
 
     def do_destroy(self, args):
         """ Deletes an instance based on the class name and id """
         cls_name = self.validate_class_name(args)
         if cls_name:
-            obj_key = self.validate_obj_id(args)
-            if obj_key:
-                del storage.all()[obj_key]
+            values_validated = self.validate_obj_id(args)
+            if values_validated: # handled Nonetype return. This was a pain!
+                cls_instance, cls_key = values_validated
+                del storage.all()[cls_key]
                 storage.save()
 
 
