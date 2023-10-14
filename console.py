@@ -36,8 +36,8 @@ class HBNBCommand(cmd.Cmd):
          Args:
             args (str): The input string containing class name and instance ID.
         Returns:
-            list: A list containing the split arguments if the instance ID is
-                provided; otherwise, prints an error message.
+            list or None: A list containing the split arguments if the instance ID
+                            is provided; otherwise, prints an error message.
         """
         arguments = args.split()
         if len(arguments) < 2:
