@@ -1,12 +1,8 @@
 #!/usr/bin/python3
-
-"""
-Module that contains class for storage and persistence between
+""" Module that contains class for storage and persistence between
 sessions which is vital for an application such as this
 """
-
 import json
-import os
 
 
 class FileStorage:
@@ -41,8 +37,8 @@ class FileStorage:
         """
         my_dict = {}
         with open(FileStorage.__file_path, "w", encoding="utf8") as file:
-            for key, _ in FileStorage.__objects.items():
-                my_dict[key] = FileStorage.__objects[key].to_dict()
+            for key, val in FileStorage.__objects.items():
+                my_dict[key] = val.to_dict()
             json.dump(my_dict, file)
 
     def reload(self):
@@ -50,20 +46,7 @@ class FileStorage:
         format to a dictionary, and assigns the __objects attribute to them.
         If the file doesn't exist, no errors or exceptions are raised.
         """
-        # # TODO: FIND A BETTER WAY OF ORGANISING THIS
-        # from models.base_model import BaseModel
-
-        # TODO FIX: check the cls_map method below, i created that method
-        # so that we could also use it in the console by just caling the method
-        # from there instead of re_mapping the classes in the console again.
-        # IF it seem good to you, then you clean up this notes and merge.
-
-        # # Store a key-pair value of each class and its string name
-        # cls_map = {
-        #         "BaseModel" : BaseModel,
-        #     }
-
-        if os.path.exists(FileStorage.__file_path):
+        try:
             with open(FileStorage.__file_path, "r") as file:
                 data = json.load(file)
                 for objs in data.values():
@@ -71,8 +54,8 @@ class FileStorage:
         # get cls name from the dictionary of classes returned in cls_map func.
                     cls_name = self.cls_map()[cls_key]
                     self.new(cls_name(**objs))
-        else:
-            return
+        except FileNotFoundError:
+            pass
 
     def cls_map(self):
         """
@@ -83,9 +66,19 @@ class FileStorage:
             dict: A dictionary containing class names as keys and the
                     corresponding class objects as its values.
         """
-        from models.base_model import BaseModel
+		from models.user import User
+		from models.city import City
+		from models.place import Place
+		from models.state import State
+		from models.review import Review
+		from models.amenity import Amenity
+		from models.base_model import BaseModel
 
-        all_classes = {
-                "BaseModel" : BaseModel,
-            }
-        return all_classes
+		cls_mapp = {
+				"Place": Place,
+				"State": State,
+				"Review": Review,
+				"Amenity": Amenity,
+    			"BaseModel": BaseModel,
+    			"User": User, "City": City
+		}
