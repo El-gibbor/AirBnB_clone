@@ -6,7 +6,7 @@ from models.base_model import BaseModel
 
 
 class Review(BaseModel):
-    """Review class for representing reviews in the Airbnb application.
+    """ Review class for representing reviews in the Airbnb application.
 
     Public class attributes:
         place_id (str): Empty string by default, representing the ID of
