@@ -61,13 +61,13 @@ class FileStorage:
         from models.base_model import BaseModel
 
         cls_map = {
-
-                "User": User, "City": City,
-                "Place": Place,
-                "BaseModel": BaseModel,
+                "User": User,
+                "City": City,
                 "State": State,
+                "Place": Place,
                 "Review": Review,
-                "Amenity": Amenity
+                "Amenity": Amenity,
+                "BaseModel": BaseModel
         }
         return cls_map
 
