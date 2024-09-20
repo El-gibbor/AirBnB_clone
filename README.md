@@ -23,7 +23,7 @@ This console serves as the foundation, where HTML/CSS templating, database stora
 * `models`  directory contain all classes used for the entire project. A class, called “model” in a OOP project is the representation of an object/instance.
 * `tests` directory contain all unit tests.
 * `console.py` file is the entry point of our command interpreter.
-* `models/base_model.py` file is the base class of all our models. It contains common elements:
+* `models/base_model.py` file is the base class of all our models. It contains common element:
     * __attributes__: `id`, `created_at` and `updated_at`
     * __methods__: `save()` and `to_json()`
 * `models/engine` directory contain all storage classes (using the same prototype). For the moment we have only one: `file_storage.py`.
